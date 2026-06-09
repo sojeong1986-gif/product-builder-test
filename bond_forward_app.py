@@ -53,7 +53,7 @@ st.markdown("""
 
 # ── 엑셀 파싱 함수 ──────────────────────────────────────────────────
 @st.cache_data
-def load_excel(path="동업사_본드포워드_현황.xlsx"):
+def load_excel(path="bond_forward.xlsx"):
     wb = load_workbook(path, read_only=True, data_only=True)
     ws = wb.active
     data = [row for row in ws.iter_rows(values_only=True)]
