@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import urllib.parse
 
-st.set_page_config(page_title="동업사 본드포워드 현황", page_icon="📊", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="보험사 본드포워드 현황", page_icon="📊", layout="wide", initial_sidebar_state="collapsed")
 
 st.markdown("""
 <style>
