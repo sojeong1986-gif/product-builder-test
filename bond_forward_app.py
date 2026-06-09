@@ -46,6 +46,7 @@ st.markdown("""
 .styled-table tr.grand-total{background:#1a2340;color:white;font-weight:700;}
 .styled-table tr.grand-total td{color:white;border-bottom:none;padding:9px 10px;font-size:15px;}
 .styled-table tr.grand-total td:first-child{padding-left:12px;}
+.styled-table tr.grand-total td:nth-child(2){color:white;background:#1a2340;border-left:2px solid #2d3f6b;border-right:2px solid #2d3f6b;}
 .share-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;border:none;}
 .btn-kakao{background:#FEE500;color:#3C1E1E;}
 .print-hint{font-size:12px;color:#8a94a6;display:flex;align-items:center;gap:6px;}
@@ -222,7 +223,8 @@ with table_col:
     bg1,fg1="#e3f2fd","#1565c0"; bg2,fg2="#f3e5f5","#6a1b9a"
     s_rows=f'<tr><td colspan="5" style="background:{bg1};color:{fg1};font-weight:700;padding:6px 14px;font-size:12px">▶ 손해보험</td></tr>'+render_group("손보")
     g_rows=f'<tr><td colspan="5" style="background:{bg2};color:{fg2};font-weight:700;padding:6px 14px;font-size:12px">▶ 생명보험</td></tr>'+render_group("생보")
-    grand=f'<tr class="grand-total"><td>생/손보 합계</td><td></td><td>{total_bal:,.0f}</td><td></td><td>100%</td></tr>'
+    total_asset = sum(d["자산총계"] for d in RAW.values())
+    grand=f'<tr class="grand-total"><td>주요 생손보 합계</td><td>{total_asset:,.0f}</td><td>{total_bal:,.0f}</td><td></td><td>100%</td></tr>'
     header='<table class="styled-table"><thead><tr><th style="text-align:left">회사</th><th>자산총계(억)</th><th>잔액(억)</th><th>전분기比</th><th>자산비중</th></tr></thead><tbody>'
     body={"전체":s_rows+g_rows+grand,"손보":s_rows,"생보":g_rows}
     st.markdown(header+body[sel_type]+"</tbody></table>", unsafe_allow_html=True)
