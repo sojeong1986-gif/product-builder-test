@@ -216,7 +216,7 @@ with table_col:
             diff=cur-prev; arrow="▲" if diff>0 else("▼" if diff<0 else "–")
             color="#2e7d32" if diff>0 else("#c62828" if diff<0 else "#888")
             ratio=cur/d["자산총계"]*100 if d["자산총계"] else 0
-            rows_html+=f'<tr><td>{co}</td><td>{d["자산총계"]:,.0f}</td><td>{cur:,.0f}</td><td><span style="color:{color};font-size:11px">{arrow} {abs(diff):,.0f}</span></td><td style="border-left:3px solid #ff7043;border-right:3px solid #ff7043;">{ratio:.2f}%</td></tr>'
+            rows_html+=f'<tr><td>{co}</td><td>{d["자산총계"]:,.0f}</td><td>{cur:,.0f}</td><td><span style="color:{color};font-size:15px">{arrow} {abs(diff):,.0f}</span></td><td style="border-left:3px solid #ff7043;border-right:3px solid #ff7043;">{ratio:.2f}%</td></tr>'
             grp_bal+=cur
         share=grp_bal/total_bal*100 if total_bal else 0
         cls="손보-total" if 구분=="손보" else "생보-total"
@@ -228,7 +228,7 @@ with table_col:
     g_rows=f'<tr><td colspan="5" style="background:{bg2};color:{fg2};font-weight:700;padding:6px 14px;font-size:12px">▶ 생명보험</td></tr>'+render_group("생보")
     total_asset = sum(d["자산총계"] for d in RAW.values())
     grand=f'<tr class="grand-total"><td>주요 생손보 합계</td><td>{total_asset:,.0f}</td><td>{total_bal:,.0f}</td><td></td><td style="border-left:3px solid #ff7043;border-right:3px solid #ff7043;">100%</td></tr>'
-    header='<table class="styled-table"><thead><tr><th style="text-align:left">회사</th><th>자산총계(억)</th><th>잔액(억)</th><th>전분기比</th><th style="border-left:3px solid #ff7043;border-right:3px solid #ff7043;border-top:3px solid #ff7043;color:#ff7043;">자산비중</th></tr></thead><tbody>'
+    header='<table class="styled-table"><thead><tr><th style="text-align:left">회사</th><th>자산총계(억)</th><th>잔액(억)</th><th>전분기比</th><th style="border-left:3px solid #ff7043;border-right:3px solid #ff7043;border-top:3px solid #ff7043;color:#ff7043;">자산대비<br>채권선도비중</th></tr></thead><tbody>'
     body={"전체":s_rows+g_rows+grand,"손보":s_rows,"생보":g_rows}
     st.markdown(header+body[sel_type]+"</tbody></table>", unsafe_allow_html=True)
 
