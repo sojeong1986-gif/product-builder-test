@@ -216,19 +216,19 @@ with table_col:
             diff=cur-prev; arrow="▲" if diff>0 else("▼" if diff<0 else "–")
             color="#2e7d32" if diff>0 else("#c62828" if diff<0 else "#888")
             ratio=cur/d["자산총계"]*100 if d["자산총계"] else 0
-            rows_html+=f'<tr><td>{co}</td><td>{d["자산총계"]:,.0f}</td><td>{cur:,.0f}</td><td><span style="color:{color};font-size:11px">{arrow} {abs(diff):,.0f}</span></td><td>{ratio:.2f}%</td></tr>'
+            rows_html+=f'<tr><td>{co}</td><td>{d["자산총계"]:,.0f}</td><td>{cur:,.0f}</td><td><span style="color:{color};font-size:11px">{arrow} {abs(diff):,.0f}</span></td><td style="border-left:3px solid #ff7043;border-right:3px solid #ff7043;">{ratio:.2f}%</td></tr>'
             grp_bal+=cur
         share=grp_bal/total_bal*100 if total_bal else 0
         cls="손보-total" if 구분=="손보" else "생보-total"
         grp_asset = sum(RAW[c]["자산총계"] for c in cos)
-        rows_html+=f'<tr class="{cls}"><td>{"주요 손보사 계" if 구분=="손보" else "주요 생보사 계"}</td><td>{grp_asset:,.0f}</td><td>{grp_bal:,.0f}</td><td></td><td>{share:.1f}%</td></tr>'
+        rows_html+=f'<tr class="{cls}"><td>{"주요 손보사 계" if 구분=="손보" else "주요 생보사 계"}</td><td>{grp_asset:,.0f}</td><td>{grp_bal:,.0f}</td><td></td><td style="border-left:3px solid #ff7043;border-right:3px solid #ff7043;">{share:.1f}%</td></tr>'
         return rows_html
     bg1,fg1="#e3f2fd","#1565c0"; bg2,fg2="#f3e5f5","#6a1b9a"
     s_rows=f'<tr><td colspan="5" style="background:{bg1};color:{fg1};font-weight:700;padding:6px 14px;font-size:12px">▶ 손해보험</td></tr>'+render_group("손보")
     g_rows=f'<tr><td colspan="5" style="background:{bg2};color:{fg2};font-weight:700;padding:6px 14px;font-size:12px">▶ 생명보험</td></tr>'+render_group("생보")
     total_asset = sum(d["자산총계"] for d in RAW.values())
-    grand=f'<tr class="grand-total"><td>주요 생손보 합계</td><td>{total_asset:,.0f}</td><td>{total_bal:,.0f}</td><td></td><td>100%</td></tr>'
-    header='<table class="styled-table"><thead><tr><th style="text-align:left">회사</th><th>자산총계(억)</th><th>잔액(억)</th><th>전분기比</th><th>자산비중</th></tr></thead><tbody>'
+    grand=f'<tr class="grand-total"><td>주요 생손보 합계</td><td>{total_asset:,.0f}</td><td>{total_bal:,.0f}</td><td></td><td style="border-left:3px solid #ff7043;border-right:3px solid #ff7043;">100%</td></tr>'
+    header='<table class="styled-table"><thead><tr><th style="text-align:left">회사</th><th>자산총계(억)</th><th>잔액(억)</th><th>전분기比</th><th style="border-left:3px solid #ff7043;border-right:3px solid #ff7043;border-top:3px solid #ff7043;color:#ff7043;">자산비중</th></tr></thead><tbody>'
     body={"전체":s_rows+g_rows+grand,"손보":s_rows,"생보":g_rows}
     st.markdown(header+body[sel_type]+"</tbody></table>", unsafe_allow_html=True)
 
@@ -248,10 +248,10 @@ for 구분,bg,fg,label,cls in [("손보","#e3f2fd","#1565c0","손해보험","손
         d=RAW[co]; cells=""
         for i,p in enumerate(PERIODS):
             bal=d["잔액"][i] if i<len(d["잔액"]) else 0; grp_sums[i]+=bal
-            hl="background:#fff8e1;font-weight:700;border-left:3px solid #ff7043;border-right:3px solid #ff7043;" if p==sel_period else ""
+            hl="font-weight:700;border-left:3px solid #ff7043;border-right:3px solid #ff7043;" if p==sel_period else ""
             cells+=f'<td style="{hl}">{bal:,.0f}</td>'
         pivot_rows+=f'<tr><td>{co}</td><td>{d["자산총계"]:,.0f}</td>{cells}</tr>'
-    gcells="".join([f'<td style="background:{"#fff3e0" if p==sel_period else bg};font-weight:700;color:{fg};font-size:15px;padding:11px 16px;{"border-left:3px solid #ff7043;border-right:3px solid #ff7043;" if p==sel_period else ""}">{s:,.0f}</td>' for p,s in zip(PERIODS,grp_sums)])
+    gcells="".join([f'<td style="background:{bg};font-weight:700;color:{fg};font-size:15px;padding:11px 16px;{"border-left:3px solid #ff7043;border-right:3px solid #ff7043;" if p==sel_period else ""}">{s:,.0f}</td>' for p,s in zip(PERIODS,grp_sums)])
     pivot_rows+=f'<tr class="{cls}"><td>{"주요 손보사 계" if 구분=="손보" else "주요 생보사 계"}</td><td></td>{gcells}</tr>'
     for i in range(len(PERIODS)): grp_totals[구분][i]=grp_sums[i]
 total_cells="".join([f'<td style="background:{"#2d3f6b" if p==sel_period else "#1a2340"};font-weight:700;font-size:15px;padding:11px 16px;{"border-left:3px solid #ff7043;border-right:3px solid #ff7043;" if p==sel_period else ""}">{grp_totals["손보"][i]+grp_totals["생보"][i]:,.0f}</td>' for i,p in enumerate(PERIODS)])
