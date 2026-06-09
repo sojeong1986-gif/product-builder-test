@@ -108,7 +108,7 @@ def load_excel(path="동업사_본드포워드_현황.xlsx"):
         # 잔액은 앞에서 len(periods)개
         balances = nums[:len(periods)] if len(nums) >= len(periods) else nums
 
-        구분 = "손보" if name in손보 else "생보"
+        구분 = "손보" if name in 손보 else "생보"
         companies[name] = {
             "구분": 구분,
             "자산총계": asset or 0,
