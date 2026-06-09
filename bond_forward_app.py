@@ -100,16 +100,14 @@ col_title, col_btn = st.columns([5, 3])
 with col_title:
     st.markdown('<div class="page-title">📊 동업사 본드포워드 현황</div><div class="page-subtitle">보험업계 금리선도(Bond Forward) 미결제약정 현황 모니터링</div>', unsafe_allow_html=True)
 with col_btn:
-    page_url = "https://sojeong1986-gif-product-builder-test-bond-forward-app-8hzloc.streamlit.app"
-    encoded_url = urllib.parse.quote(page_url, safe="")
-    encoded_txt = urllib.parse.quote("📊 동업사 본드포워드 현황\n" + page_url, safe="")
-    # 카카오스토리 공유 (앱키 불필요, PC/모바일 모두 작동)
-    kakao_share = f"https://story.kakao.com/share?url={encoded_url}"
-    st.markdown(f"""
-    <div class="no-print" style="display:flex;justify-content:flex-end;align-items:center;gap:12px;padding-top:14px;">
-        <span class="print-hint">🖨️ 인쇄: <kbd>Ctrl+P</kbd></span>
-        <a class="share-btn btn-kakao" href="{kakao_share}" target="_blank">💬 카카오 공유</a>
-    </div>""", unsafe_allow_html=True)
+    st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
+    st.components.v1.html("""
+    <button onclick="window.parent.print()"
+        style="width:100%;padding:9px 18px;background:#1a2340;color:white;border:none;
+               border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">
+        🖨️ 인쇄 / PDF 저장
+    </button>
+    """, height=48)
 
 st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
