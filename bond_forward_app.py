@@ -187,10 +187,13 @@ with chart_col:
         legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1,bgcolor="rgba(255,255,255,0.9)",bordercolor="#e8edf3",borderwidth=1),
         xaxis=dict(showgrid=False,tickfont=dict(size=11)),yaxis=dict(showgrid=True,gridcolor="#f0f4f9",tickformat=",",ticksuffix=" 억",tickfont=dict(size=11)),
         margin=dict(l=10,r=10,t=40,b=10),height=340,hovermode="x unified")
+    # 조회시점 해당 바에 테두리로 강조 (색상 변경 없이)
     for trace in fig.data:
         if trace.type=="bar":
-            trace.marker.color=["#ff7043" if p==sel_period else("#1565c0" if trace.name=="손보" else "#6a1b9a") for p in PERIODS]
+            trace.marker.color="#1565c0" if trace.name=="손보" else "#6a1b9a"
             trace.marker.opacity=1
+            trace.marker.line.width=[3 if p==sel_period else 0 for p in PERIODS]
+            trace.marker.line.color="#ff7043"
     st.plotly_chart(fig,use_container_width=True)
 
     st.markdown('<div class="section-title" style="margin-top:4px">🥧 생/손보 비중</div>', unsafe_allow_html=True)
