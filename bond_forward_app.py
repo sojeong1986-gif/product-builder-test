@@ -81,7 +81,7 @@ def load_excel(path="동업사_본드포워드_현황.xlsx"):
         name = str(row[0]).strip() if row[0] else ""
         if not name or any(kw in name for kw in skip_keywords):
             continue
-        if name not in손보 and name not in 생보_names:
+        if name not in 손보 and name not in 생보_names:
             continue
 
         # 자산총계
