@@ -19,11 +19,11 @@ st.markdown("""
 .badge-up{background:#e8f5e9;color:#2e7d32;}
 .badge-down{background:#ffebee;color:#c62828;}
 .section-title{font-size:15px;font-weight:700;color:#1a2340;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #e8edf3;}
-.styled-table{width:100%;border-collapse:collapse;font-size:13px;}
+.styled-table{width:100%;border-collapse:collapse;font-size:14px;}
 .styled-table thead tr{background:#f0f4f9;}
-.styled-table th{padding:10px 14px;text-align:right;font-weight:600;color:#4a5568;border-bottom:1px solid #e8edf3;white-space:nowrap;}
+.styled-table th{padding:11px 14px;text-align:right;font-weight:700;color:#4a5568;border-bottom:1px solid #e8edf3;white-space:nowrap;font-size:13px;}
 .styled-table th:first-child{text-align:left;}
-.styled-table td{padding:9px 14px;text-align:right;color:#2d3748;border-bottom:1px solid #f0f4f9;white-space:nowrap;}
+.styled-table td{padding:10px 14px;text-align:right;color:#2d3748;border-bottom:1px solid #f0f4f9;white-space:nowrap;font-size:14px;}
 .styled-table td:first-child{text-align:left;font-weight:600;color:#1a2340;}
 .styled-table tr:hover{background:#f7f9fc;}
 .styled-table tr.손보-total{background:#e3f2fd;font-weight:700;}
@@ -228,10 +228,10 @@ for 구분,bg,fg,label,cls in [("손보","#e3f2fd","#1565c0","손해보험","손
             hl="background:#fff8e1;font-weight:700;" if p==sel_period else ""
             cells+=f'<td style="{hl}">{bal:,.0f}</td>'
         pivot_rows+=f'<tr><td>{co}</td><td>{d["자산총계"]:,.0f}</td>{cells}</tr>'
-    gcells="".join([f'<td style="{"background:#fff8e1;" if p==sel_period else f"background:{bg};"} font-weight:700;color:{fg}">{s:,.0f}</td>' for p,s in zip(PERIODS,grp_sums)])
+    gcells="".join([f'<td style="background:{"#fff3e0" if p==sel_period else bg};font-weight:700;color:{fg};font-size:14px;">{s:,.0f}</td>' for p,s in zip(PERIODS,grp_sums)])
     pivot_rows+=f'<tr class="{cls}"><td>{"손보" if 구분=="손보" else "생보"} 소계</td><td></td>{gcells}</tr>'
     for i in range(len(PERIODS)): grp_totals[구분][i]=grp_sums[i]
-total_cells="".join([f'<td style="{"background:#2d3f6b;" if p==sel_period else ""}font-weight:700;">{grp_totals["손보"][i]+grp_totals["생보"][i]:,.0f}</td>' for i,p in enumerate(PERIODS)])
+total_cells="".join([f'<td style="background:{"#2d3f6b" if p==sel_period else "#1a2340"};font-weight:700;font-size:14px;">{grp_totals["손보"][i]+grp_totals["생보"][i]:,.0f}</td>' for i,p in enumerate(PERIODS)])
 pivot_rows+=f'<tr class="grand-total"><td>생/손보 합계</td><td></td>{total_cells}</tr>'
 ph="<th style='text-align:left'>회사</th><th>자산총계</th>"+"".join([f'<th style="{"color:#e65100;font-weight:800;" if p==sel_period else ""}">{p}</th>' for p in PERIODS])
 st.markdown(f'<table class="styled-table"><thead><tr>{ph}</tr></thead><tbody>{pivot_rows}</tbody></table>', unsafe_allow_html=True)
