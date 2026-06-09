@@ -38,9 +38,11 @@ st.markdown("""
 .styled-table tr.손보-total{background:#dbeafe;font-weight:700;}
 .styled-table tr.손보-total td{color:#1565c0;padding:8px 10px;font-size:15px;}
 .styled-table tr.손보-total td:first-child{padding-left:12px;}
+.styled-table tr.손보-total td:nth-child(2){color:#1565c0;background:#dbeafe;border-left:2px solid #bfdbfe;border-right:2px solid #bfdbfe;}
 .styled-table tr.생보-total{background:#ede9fe;font-weight:700;}
 .styled-table tr.생보-total td{color:#6a1b9a;padding:8px 10px;font-size:15px;}
 .styled-table tr.생보-total td:first-child{padding-left:12px;}
+.styled-table tr.생보-total td:nth-child(2){color:#6a1b9a;background:#ede9fe;border-left:2px solid #d8b4fe;border-right:2px solid #d8b4fe;}
 .styled-table tr.grand-total{background:#1a2340;color:white;font-weight:700;}
 .styled-table tr.grand-total td{color:white;border-bottom:none;padding:9px 10px;font-size:15px;}
 .styled-table tr.grand-total td:first-child{padding-left:12px;}
@@ -214,7 +216,8 @@ with table_col:
             grp_bal+=cur
         share=grp_bal/total_bal*100 if total_bal else 0
         cls="손보-total" if 구분=="손보" else "생보-total"
-        rows_html+=f'<tr class="{cls}"><td>{"주요 손보사 계" if 구분=="손보" else "주요 생보사 계"}</td><td></td><td>{grp_bal:,.0f}</td><td></td><td>{share:.1f}%</td></tr>'
+        grp_asset = sum(RAW[c]["자산총계"] for c in cos)
+        rows_html+=f'<tr class="{cls}"><td>{"주요 손보사 계" if 구분=="손보" else "주요 생보사 계"}</td><td>{grp_asset:,.0f}</td><td>{grp_bal:,.0f}</td><td></td><td>{share:.1f}%</td></tr>'
         return rows_html
     bg1,fg1="#e3f2fd","#1565c0"; bg2,fg2="#f3e5f5","#6a1b9a"
     s_rows=f'<tr><td colspan="5" style="background:{bg1};color:{fg1};font-weight:700;padding:6px 14px;font-size:12px">▶ 손해보험</td></tr>'+render_group("손보")
