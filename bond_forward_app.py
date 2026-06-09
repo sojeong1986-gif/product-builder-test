@@ -218,8 +218,14 @@ with chart_col:
         yaxis=dict(showgrid=True, gridcolor="#f0f4f9", tickformat=",", ticksuffix=" 억", tickfont=dict(size=11)),
         margin=dict(l=10, r=10, t=40, b=10), height=340, hovermode="x unified",
     )
-    fig.add_vline(x=sel_period, line_dash="dash", line_color="#ff7043", line_width=1.5,
-                  annotation_text="조회시점", annotation_font_color="#ff7043", annotation_font_size=11)
+    # 조회시점 강조: 바 색상으로 표시
+    fig.update_traces(marker_opacity=0.5, selector=dict(type="bar"))
+    for trace in fig.data:
+        if trace.type == "bar":
+            colors_list = ["#ff7043" if p == sel_period else (
+                "#1565c0" if trace.name == "손보" else "#6a1b9a") for p in PERIODS]
+            trace.marker.color = colors_list
+            trace.marker.opacity = 1
     st.plotly_chart(fig, use_container_width=True)
 
     # 도넛
