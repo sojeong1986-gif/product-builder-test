@@ -113,7 +113,7 @@ df_long = make_df()
 # ── 헤더 ───────────────────────────────────────────────────────────
 col_title, col_btn = st.columns([5, 3])
 with col_title:
-    st.markdown('<div class="page-title">📊 동업사 본드포워드 현황</div><div class="page-subtitle">보험업계 금리선도(Bond Forward) 미결제약정 현황 모니터링</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-title">📊 보험사 본드포워드 현황</div><div class="page-subtitle">보험업계 금리선도(Bond Forward) 미결제약정 현황 모니터링</div>', unsafe_allow_html=True)
 with col_btn:
     st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
     st.components.v1.html("""
