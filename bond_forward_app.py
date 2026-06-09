@@ -119,15 +119,10 @@ with col_title:
     </div>
     """, unsafe_allow_html=True)
 with col_btn:
-    st.markdown("""
-    <div style="display:flex;justify-content:flex-end;align-items:center;height:100%;padding-top:12px;">
-        <button class="no-print" onclick="window.print()"
-            style="padding:8px 18px;background:#1a2340;color:white;border:none;
-                   border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">
-            🖨️ 인쇄 / PDF
-        </button>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("<div style='padding-top:14px;'>", unsafe_allow_html=True)
+    if st.button("🖨️ 인쇄 / PDF", use_container_width=True):
+        st.markdown("<script>window.print();</script>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
