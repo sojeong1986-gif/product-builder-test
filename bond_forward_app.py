@@ -26,15 +26,15 @@ st.markdown("""
 .styled-table td{padding:7px 10px;text-align:right;color:#2d3748;border-bottom:1px solid #f0f4f9;white-space:nowrap;font-size:15px;line-height:1.3;}
 .styled-table td:first-child{text-align:left;font-weight:600;color:#1a2340;padding-left:12px;}
 .styled-table td:nth-child(2){
-    color:#94a3b8;font-size:13px;
+    color:#2d3748;font-size:15px;
     border-left:2px solid #e8edf3;border-right:2px solid #e8edf3;
-    background:#f8fafc;font-style:italic;}
+    background:#fafbfc;}
 .styled-table th:nth-child(2){
-    color:#94a3b8;font-size:12px;font-style:italic;
+    color:#4a5568;font-size:14px;
     border-left:2px solid #e8edf3;border-right:2px solid #e8edf3;
     background:#f4f6f9;}
 .styled-table tr:hover td{background:#f0f6ff;}
-.styled-table tr:hover td:nth-child(2){background:#f0f4f8;}
+.styled-table tr:hover td:nth-child(2){background:#e8f0ff;}
 .styled-table tr.손보-total{background:#dbeafe;font-weight:700;}
 .styled-table tr.손보-total td{color:#1565c0;padding:8px 10px;font-size:15px;}
 .styled-table tr.손보-total td:first-child{padding-left:12px;}
@@ -214,7 +214,7 @@ with table_col:
             grp_bal+=cur
         share=grp_bal/total_bal*100 if total_bal else 0
         cls="손보-total" if 구분=="손보" else "생보-total"
-        rows_html+=f'<tr class="{cls}"><td>{"손보" if 구분=="손보" else "생보"} 합계</td><td></td><td>{grp_bal:,.0f}</td><td></td><td>{share:.1f}%</td></tr>'
+        rows_html+=f'<tr class="{cls}"><td>{"주요 손보사 계" if 구분=="손보" else "주요 생보사 계"}</td><td></td><td>{grp_bal:,.0f}</td><td></td><td>{share:.1f}%</td></tr>'
         return rows_html
     bg1,fg1="#e3f2fd","#1565c0"; bg2,fg2="#f3e5f5","#6a1b9a"
     s_rows=f'<tr><td colspan="5" style="background:{bg1};color:{fg1};font-weight:700;padding:6px 14px;font-size:12px">▶ 손해보험</td></tr>'+render_group("손보")
@@ -244,7 +244,7 @@ for 구분,bg,fg,label,cls in [("손보","#e3f2fd","#1565c0","손해보험","손
             cells+=f'<td style="{hl}">{bal:,.0f}</td>'
         pivot_rows+=f'<tr><td>{co}</td><td>{d["자산총계"]:,.0f}</td>{cells}</tr>'
     gcells="".join([f'<td style="background:{"#fff3e0" if p==sel_period else bg};font-weight:700;color:{fg};font-size:15px;padding:11px 16px;">{s:,.0f}</td>' for p,s in zip(PERIODS,grp_sums)])
-    pivot_rows+=f'<tr class="{cls}"><td>{"손보" if 구분=="손보" else "생보"} 소계</td><td></td>{gcells}</tr>'
+    pivot_rows+=f'<tr class="{cls}"><td>{"주요 손보사 계" if 구분=="손보" else "주요 생보사 계"}</td><td></td>{gcells}</tr>'
     for i in range(len(PERIODS)): grp_totals[구분][i]=grp_sums[i]
 total_cells="".join([f'<td style="background:{"#2d3f6b" if p==sel_period else "#1a2340"};font-weight:700;font-size:15px;padding:11px 16px;">{grp_totals["손보"][i]+grp_totals["생보"][i]:,.0f}</td>' for i,p in enumerate(PERIODS)])
 pivot_rows+=f'<tr class="grand-total"><td>생/손보 합계</td><td></td>{total_cells}</tr>'
@@ -351,6 +351,6 @@ with ts_right:
 # ── 하단 ─────────────────────────────────────────────────────────
 st.markdown("""
 <div style="margin-top:32px;padding-top:16px;border-top:1px solid #e8edf3;display:flex;justify-content:space-between;align-items:center;">
-    <span style="font-size:12px;color:#aab0bc;">※ 자료: 각사 DART 공시 / 단위: 억원, % &nbsp; ※ 자산대비 비중 = 본드포워드 잔액 ÷ 자산총계</span>
+    <span style="font-size:12px;color:#aab0bc;">※ 자료: 각사 DART 공시 / 단위: 억원, % &nbsp;|&nbsp; ※ 자산대비 비중 = 본드포워드 잔액 ÷ 자산총계 &nbsp;|&nbsp; ※ 자산총계는 조회 기준 시점 최근 분기 기준</span>
     <span style="font-size:12px;color:#aab0bc;">메리츠화재 자산운용본부</span>
 </div>""", unsafe_allow_html=True)
