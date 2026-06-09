@@ -21,19 +21,29 @@ st.markdown("""
 .section-title{font-size:15px;font-weight:700;color:#1a2340;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #e8edf3;}
 .styled-table{width:100%;border-collapse:collapse;font-size:15px;}
 .styled-table thead tr{background:#f0f4f9;}
-.styled-table th{padding:12px 16px;text-align:right;font-weight:700;color:#4a5568;border-bottom:2px solid #e8edf3;white-space:nowrap;font-size:14px;}
-.styled-table th:first-child{text-align:left;}
-.styled-table td{padding:11px 16px;text-align:right;color:#2d3748;border-bottom:1px solid #f0f4f9;white-space:nowrap;font-size:15px;}
-.styled-table td:first-child{text-align:left;font-weight:600;color:#1a2340;}
-.styled-table td:nth-child(2){color:#7b8fa6;font-size:13px;border-left:3px solid #e8edf3;border-right:3px solid #e8edf3;background:#fafbfc;}
-.styled-table th:nth-child(2){color:#7b8fa6;font-size:13px;border-left:3px solid #e8edf3;border-right:3px solid #e8edf3;background:#f4f6f9;}
-.styled-table tr:hover{background:#f7f9fc;}
-.styled-table tr.손보-total{background:#e3f2fd;font-weight:700;}
-.styled-table tr.손보-total td{color:#1565c0;}
-.styled-table tr.생보-total{background:#f3e5f5;font-weight:700;}
-.styled-table tr.생보-total td{color:#6a1b9a;}
+.styled-table th{padding:9px 10px;text-align:right;font-weight:700;color:#4a5568;border-bottom:2px solid #d1dce8;white-space:nowrap;font-size:14px;}
+.styled-table th:first-child{text-align:left;padding-left:12px;}
+.styled-table td{padding:7px 10px;text-align:right;color:#2d3748;border-bottom:1px solid #f0f4f9;white-space:nowrap;font-size:15px;line-height:1.3;}
+.styled-table td:first-child{text-align:left;font-weight:600;color:#1a2340;padding-left:12px;}
+.styled-table td:nth-child(2){
+    color:#94a3b8;font-size:13px;
+    border-left:2px solid #e8edf3;border-right:2px solid #e8edf3;
+    background:#f8fafc;font-style:italic;}
+.styled-table th:nth-child(2){
+    color:#94a3b8;font-size:12px;font-style:italic;
+    border-left:2px solid #e8edf3;border-right:2px solid #e8edf3;
+    background:#f4f6f9;}
+.styled-table tr:hover td{background:#f0f6ff;}
+.styled-table tr:hover td:nth-child(2){background:#f0f4f8;}
+.styled-table tr.손보-total{background:#dbeafe;font-weight:700;}
+.styled-table tr.손보-total td{color:#1565c0;padding:8px 10px;font-size:15px;}
+.styled-table tr.손보-total td:first-child{padding-left:12px;}
+.styled-table tr.생보-total{background:#ede9fe;font-weight:700;}
+.styled-table tr.생보-total td{color:#6a1b9a;padding:8px 10px;font-size:15px;}
+.styled-table tr.생보-total td:first-child{padding-left:12px;}
 .styled-table tr.grand-total{background:#1a2340;color:white;font-weight:700;}
-.styled-table tr.grand-total td{color:white;border-bottom:none;}
+.styled-table tr.grand-total td{color:white;border-bottom:none;padding:9px 10px;font-size:15px;}
+.styled-table tr.grand-total td:first-child{padding-left:12px;}
 .share-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;border:none;}
 .btn-kakao{background:#FEE500;color:#3C1E1E;}
 .print-hint{font-size:12px;color:#8a94a6;display:flex;align-items:center;gap:6px;}
